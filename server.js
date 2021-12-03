@@ -1,6 +1,5 @@
 'use strict';
 
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const express = require('express');
@@ -17,12 +16,14 @@ function randomToken (byteLength = 20) {
 
 const app = express();
 
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json());
+
 app.disable('etag');
 app.disable('x-powered-by');
 app.set('view engine', 'ejs');
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // I know :-(
 const cache = {};
