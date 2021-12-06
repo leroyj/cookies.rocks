@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tracking image example (with etag)</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: auto auto 75px auto;
+            max-width: 40em;
+            padding: 0 0 0 2em;
+        }
+
+        footer {
+            font-style: italic;
+            margin-top: 10em;
+        }
+
+        .host-banner {
+            background-color: rgb(99, 36, 0);
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 2em;
+        }
+
+        .host-banner[data-host="blue"] {
+            background-color: rgb(28, 58, 114);
+        }
+
+        .host-banner[data-host="green"] {
+            background-color: rgb(0, 82, 50);
+        }
+    </style>
+</head>
+<body>
+<h1><a href="/">My Site Bros.</a></h1>
+<h2>Tracking image example (with etag)</h2>
+<p>
+    This image was sent from the server to your browser with a ETag header containing an ID (instead of a traditional checksum).
+    If the request to the image contained an ID in a "if-none-match" header, it's reused as is.
+    If not, a new random one is generated.
+</p>
+<img src="/cookie-etag.svg" alt="cookie" width="120px">
+<p>
+    By putting this image's URL on several pages of different websites,
+    it is possible to log each visited pages for a given visitor.
+</p>
+<pre>&lt;img src=&quot;//cookies.rocks/cookie-etag.svg&quot;&gt;</pre>
+<p>
+    Here is a list of the pages you visited that use this tracking image:
+</p>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Page URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% sites.forEach(({ date, referer }) => { %>
+    <tr>
+        <td><%= new Date(date).toISOString().slice(0,-5).replace('T', ' ') %></td>
+        <td><%= referer || 'Unknown' %></td>
+    </tr>
+    <% }) %>
+    </tbody>
+</table>
+<footer>
+    A project by <a href="https://twitter.com/leroyj" target="_blank">@leroyj</a>.<br>
+    derived from an initial project from <a href="https://twitter.com/hsablonniere" target="_blank">@hsablonniere</a>.
+    Hosted on <a href="http://www.clever-cloud.com/">AWS</a>.
+    Original sources on <a href="https://github.com/hsablonniere/cookies.rocks" target="_blank">Github</a>.
+</footer>
+<div class="host-banner" data-host="<%= host %>"></div>
+</body>
+</html>

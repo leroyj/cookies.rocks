@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "express"
+        "express",
+        "setup"
     ]
 }

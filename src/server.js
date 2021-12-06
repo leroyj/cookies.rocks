@@ -22,6 +22,7 @@ app.use(express.json());
 app.disable('etag');
 app.disable('x-powered-by');
 app.set('view engine', 'ejs');
+app.set('views', './src/views');
 
 app.use(cookieParser());
 
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
         : null;
 
   if (req.url === '/' || req.url === '/index.html') {
-    res.render('index.ejs', { host });
+    res.render('index', { host });
   }
 
   if (req.url === '/simple-session.html') {
@@ -220,3 +221,5 @@ app.use(express.static('public', {
 
 const port = process.env.PORT || 8080;
 app.listen(port);
+
+module.exports=app;

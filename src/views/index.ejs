@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>My Site Bros.</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: auto auto 75px auto;
+            max-width: 40em;
+            padding: 0 0 0 2em;
+        }
+
+        footer {
+            font-style: italic;
+            margin-top: 10em;
+        }
+
+        .host-banner {
+            background-color: rgb(99, 36, 0);
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 2em;
+        }
+
+        .host-banner[data-host="blue"] {
+            background-color: rgb(28, 58, 114);
+        }
+
+        .host-banner[data-host="green"] {
+            background-color: rgb(0, 82, 50);
+        }
+    </style>
+</head>
+<body>
+<h1>My Site Bros.</h1>
+<ul>
+    <li><a href="/show-cookies.html">Show cookies</a></li>
+    <li><a href="/simple-session.html">Simple session cookie example</a></li>
+    <li><a href="/simple-persistent.html">Simple persistent cookie example</a></li>
+    <li><a href="/delete-simple-cookies.html">Delete simple cookies</a></li>
+    <li><a href="/domain-attribute.html">Cookies with Domain attribute</a></li>
+    <li><a href="/path-attribute.html">Cookies with Path attribute</a></li>
+    <li><a href="/secure-attribute.html">Cookies with Secure attribute</a></li>
+    <li><a href="/httponly-attribute.html">Cookies with HttpOnly attribute</a></li>
+    <li><a href="/profile.html">Profile</a></li>
+    <li><a href="/tracking-image.html">Tracking image example</a></li>
+    <li><a href="/tracking-image-etag.html">Tracking image example (with etag)</a></li>
+</ul>
+<div class="select">
+    <span class="root"><a href="//mysite-bros.co.uk">mysite-bros.co.uk</a></span> -
+    <span class="blue"><a href="//blue.mysite-bros.co.uk">blue.mysite-bros.co.uk</a></span> -
+    <span class="big.blue"><a href="//big.blue.mysite-bros.co.uk">big.blue.mysite-bros.co.uk</a></span> -
+    <span class="green"><a href="//green.mysite-bros.co.uk">green.mysite-bros.co.uk</a></span>
+</div>
+<footer>
+    A project by <a href="https://twitter.com/leroyj" target="_blank">@leroyj</a>.<br>
+    derived from an initial project from <a href="https://twitter.com/hsablonniere" target="_blank">@hsablonniere</a>.
+    Hosted on <a href="http://www.clever-cloud.com/">AWS</a>.
+    Original sources on <a href="https://github.com/hsablonniere/cookies.rocks" target="_blank">Github</a>.
+</footer>
+<div class="host-banner" data-host="<%= host %>"></div>
+</body>
+</html>

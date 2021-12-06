@@ -1,0 +1,33 @@
+ create a template for global resources
+ store variable in SM parameters
+
+
+ The solution is at your hands. I suggest that you do the following:
+
+Create a separate template for the global resources (yes, I know that you don't like it, but it works well in my experience)
+Store references to the shared global resources in SSM using AWS::SSM::Parameter
+Deploy regional stacks and de-reference the global resources (either using Parameters, such as the AWS::SSM::Parameter::Value<String> or dynamic reference, e.g. {{resolve:ssm:S3AccessControl:2}})
+You can use either StackSets for your regional stack deployments or create a parameterized build script that deploys the regional stacks one at the time (to be executed either locally or preferably by your CI/CD server).
+
+
+stackset
+
+https://stackoverflow.com/questions/65477250/how-to-specify-region-in-cloudformation-template-to-validate-the-acm-certificate
+
+https://github.com/aws-solutions/multi-region-infrastructure-deployment
+
+https://www.wellarchitectedlabs.com/reliability/200_labs/200_deploy_and_update_cloudformation/6_multi_region_deploy/
+
+https://aws.amazon.com/fr/blogs/infrastructure-and-automation/multiple-account-multiple-region-aws-cloudformation/
+
+https://docs.aws.amazon.com/solutions/latest/multi-region-infrastructure-deployment/template.html
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
+
+https://github.com/fabricetriboix/cfn-acm-certificate
+https://github.com/binxio/cfn-certificate-provider
+https://github.com/dflook/cloudformation-dns-certificate
+
+develop a standard JS answer with js libs
+
+Use Terraform
