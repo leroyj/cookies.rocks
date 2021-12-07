@@ -1,8 +1,10 @@
 'use strict';
 
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const express = require('express');
+const ejs = require('ejs').__express;
 const url = require('url');
 
 function randomToken (byteLength = 20) {
@@ -21,10 +23,10 @@ app.use(express.json());
 
 app.disable('etag');
 app.disable('x-powered-by');
-app.set('view engine', 'ejs');
-app.engine('ejs', require('ejs').__express);
-app.set('views', './src/views');
-
+app.set('view engine', 'ejs')
+app.engine('.ejs', ejs)
+//app.set('views', './src/views');
+app.set('views', path.join(__dirname, 'views'))
 app.use(cookieParser());
 
 // I know :-(

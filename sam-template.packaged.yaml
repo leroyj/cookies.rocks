@@ -22,10 +22,10 @@ Resources:
   ExpressLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cookieshaking-image-repo/50c5172750bddcf1eb8b75f2e74cb72e
+      CodeUri: s3://cookieshaking-image-repo/4f1abefc15fdcde3735beade9e489fce
       Handler: main.handler
       MemorySize: 1024
-      Runtime: nodejs12.x
+      Runtime: nodejs14.x
       Timeout: 30
       Events:
         ProxyApiRoot:
