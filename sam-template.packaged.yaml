@@ -14,30 +14,43 @@ Conditions:
       - ''
 Resources:
   ExpressApi:
-    Type: AWS::Serverless::HttpApi
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      BinaryMediaTypes:
+      - '*/*'
   ExpressLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cookieshaking-image-repo/cc827fbbc41ea066ca09d56d75197335
+      CodeUri: s3://cookieshaking-image-repo/50c5172750bddcf1eb8b75f2e74cb72e
       Handler: main.handler
       MemorySize: 1024
       Runtime: nodejs12.x
       Timeout: 30
       Events:
         ProxyApiRoot:
-          Type: HttpApi
+          Type: Api
           Properties:
-            ApiId:
+            RestApiId:
               Ref: ExpressApi
+            Path: /
+            Method: ANY
+        ProxyApiGreedy:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: ExpressApi
+            Path: /{proxy+}
+            Method: ANY
   MyApiDomainName:
-    Type: AWS::ApiGateway2::DomainName
+    Type: AWS::ApiGateway::DomainName
     Condition: UseDomainName
     Properties:
       CertificateArn: arn:aws:acm:us-east-1:253965625087:certificate/015f99b1-4d59-4549-a230-49bae9c82fe4
       DomainName:
         Ref: DomainName
   MyApiBasePathMapping:
-    Type: AWS::ApiGateway2::BasePathMapping
+    Type: AWS::ApiGateway::BasePathMapping
     Condition: UseDomainName
     Properties:
       RestApiId:
@@ -91,7 +104,7 @@ Outputs:
     Description: Invoke URL for your API. Clicking this link will perform a GET request
       on the root resource of your API.
     Value:
-      Fn::Sub: https://${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com/
+      Fn::Sub: https://${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com/prod/
   LambdaFunctionName:
     Description: Name of the Serverless Express Lambda Function
     Value:
